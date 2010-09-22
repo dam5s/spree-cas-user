@@ -18,8 +18,8 @@ class UserSession < Authlogic::Session::Base
 
       record = search_for_record("find_by_#{User.cas_user_identifier}", controller.session[session_key])
 
-      unless self.record
-       #RELIES ON this method to securely validate that this user request stems from a real user
+      unless record
+        #RELIES ON this method to securely validate that this user request stems from a real user
         record = User.new({:login => controller.session[session_key]})
 
         if record.login.length > 255
